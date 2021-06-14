@@ -19,11 +19,16 @@ router.post('/post', function(req, res, next) {
   var exec = require('child_process').exec,
     child;
 
-  child = exec(`sudo useradd -g sftponly-d /incoming -s /sbin/nologin ${req.body.id}
-  `, function (error, stdout, stderr) {
+  child = exec(`sudo useradd ${req.body.id}
+  `, function () {
+
+    console.log(`userid ${req.body.id} is created?`)
     console.log('testing1111111111111111111')
 
   });
+
+
+
 });
 
 
