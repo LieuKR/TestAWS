@@ -11,20 +11,35 @@ router.post('/post', function(req, res, next) {
   console.log(req.body.id)
   res.redirect('back');
 
-  let random_value = Math.floor(Math.random()*10000)
-  console.log(random_value);
+
   
 
 
-  var exec = require('child_process').exec,
-    child;
+  var exec = require('child_process').exec
 
-  child = exec(`sudo useradd ${req.body.id}
-  `, function () {
+  // Create user for linux.
+  exec(`sudo useradd ${req.body.id}`, function () {
 
-    console.log(`userid ${req.body.id} is created?`)
-    console.log('testing1111111111111111111')
+    console.log(`userid ${req.body.id} is created.`)
 
+    // this value is NOT SAFE as random value
+    let random_value = Math.floor(Math.random()*10000)
+    console.log(random_value);
+
+    // 1 More callback to set password by random number
+    exec(`sudo passwd ${req.body.id}`, function () {
+      
+      // write password
+      exec(`${random_value}`, function () {
+      
+        // repeat password
+        exec(`${random_value}`, function () {
+      
+          console.log('This is password', req.body.id)
+
+        });
+      });
+    });
   });
 
 
