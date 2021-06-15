@@ -12,6 +12,7 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
-    "node-cmd": "^4.0.0"
+    "node-cmd": "^4.0.0",
+    "passwd-linux": "^2.0.0"
   }
 }
