@@ -3,6 +3,8 @@ var router = express.Router();
 
 const { spawn } = require('child_process').spawn;
 
+
+
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });
@@ -10,11 +12,21 @@ router.get('/', function(req, res) {
 
 router.post('/post', function(req, res) {
   console.log('Writed id is ', req.body.id)
+
+  const child = spawn(`sudo useradd -G sftponly ${req.body.id}`);
+
+  // this value is NOT SAFE as random value
+  let random_value = Math.floor(Math.random()*10000)
+  console.log(random_value);
   
   // Create user for linux.
-  spawn(`sudo useradd -G sftponly ${req.body.id}`, function () {
+  // spawn(`sudo useradd -G sftponly ${req.body.id}`, function () {
 
+  child.on(`sudo passwd ${req.body.id}`, function () {
     console.log(`userid ${req.body.id} is created.`)
+    console.log(`now need to make pw`)
+  })
+  
 
     // // this value is NOT SAFE as random value
     // let random_value = Math.floor(Math.random()*10000)
@@ -27,7 +39,7 @@ router.post('/post', function(req, res) {
     //   console.log('child.on is working');
     //   });
 
-    });
+    // });
 
 
 /*
