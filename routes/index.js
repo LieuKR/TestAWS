@@ -20,13 +20,19 @@ router.post('/post', function(req, res) {
     let random_value = Math.floor(Math.random()*10000)
     console.log(random_value);
 
+    console.log('stdout_1: ' + stdout);
+    console.log('stderr_1: ' + stderr);
+    if (error !== null) {
+        console.log('exec error_1: ' + error);
+    }
+
     // 1 More callback to set password by random number
     exec(`sudo passwd ${req.body.id}`, function (error, stdout, stderr) {
       
-      console.log('stdout: ' + stdout);
-      console.log('stderr: ' + stderr);
+      console.log('stdout_2: ' + stdout);
+      console.log('stderr_2: ' + stderr);
       if (error !== null) {
-          console.log('exec error: ' + error);
+          console.log('exec error_2: ' + error);
       }
       
       // // write password
