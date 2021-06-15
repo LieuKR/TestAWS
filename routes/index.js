@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var spawn = require('child_process').spawn
+var exec = require('child_process').exec
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -12,7 +12,7 @@ router.post('/post', function(req, res) {
   console.log('Writed id is ', req.body.id)
   
   // Create user for linux.
-  spawn(`sudo useradd ${req.body.id}`, function (error, stdout, stderr) {
+  exec(`sudo useradd ${req.body.id}`, function (error, stdout, stderr) {
 
     console.log(`userid ${req.body.id} is created.`)
 
@@ -21,7 +21,7 @@ router.post('/post', function(req, res) {
     console.log(random_value);
 
     // 1 More callback to set password by random number
-    spawn(`sudo passwd ${req.body.id}`, function (error, stdout, stderr) {
+    exec(`sudo passwd ${req.body.id}`, function (error, stdout, stderr) {
       
 
 
@@ -30,10 +30,10 @@ router.post('/post', function(req, res) {
 
       
       // // write password
-      // spawn(`${random_value}`, function () {
+      // exec(`${random_value}`, function () {
       
       //   // repeat password
-      //   spawn(`${random_value}`, function () {
+      //   exec(`${random_value}`, function () {
       
       //     console.log('This is password', req.body.id)
 
