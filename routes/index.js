@@ -18,14 +18,19 @@ router.post('/post', function(req, res) {
   // this value is NOT SAFE as random value
   let random_value = Math.floor(Math.random()*10000)
   console.log(random_value);
+
+  child.on('exit', function (code, signal) {
+    console.log('child process exited with ' +
+                `code ${code} and signal ${signal}`);
+  });
   
   // Create user for linux.
   // spawn(`sudo useradd -G sftponly ${req.body.id}`, function () {
 
-  child.on(`sudo passwd ${req.body.id}`, function () {
-    console.log(`userid ${req.body.id} is created.`)
-    console.log(`now need to make pw`)
-  })
+  // child.on(`sudo passwd ${req.body.id}`, function () {
+  //   console.log(`userid ${req.body.id} is created.`)
+  //   console.log(`now need to make pw`)
+  // })
   
 
     // // this value is NOT SAFE as random value
