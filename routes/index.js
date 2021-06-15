@@ -24,37 +24,11 @@ router.post('/post', function(req, res) {
     let random_value = Math.floor(Math.random()*10000)
     console.log(random_value);
 
+    exec(`sudo echo -e "${random_value}\n${random_value}" | passwd ${req.body.id}`, function (error, stdout, stderr) {
 
-
-    var cp = require ("child_process")
-    //Update password
-    var chpasswd = cp.spawn (`sudo passwd ${req.body.id}`)
-    var errmsg
-
-    //Check for errors
-    chpasswd.stderr.on ("data", function (data) {
-      errmsg += data.tostring ()
+      console.log(`password of ${req.body.id} is changed.`)
+  
     })
-
-    chpasswd.on ("exit", function (code) {
-      if (cb) {
-      errmsg
-        ?cb (new error (errmsg))
-        :cb ()
-      }
-    })
-
-    //write password
-    chpasswd.stdin.write (req.body.id + ":" + random_value)
-    chpasswd.stdin.end ()
-
-
-
-
-
-
-    
-
   });
 
   res.redirect('back');
