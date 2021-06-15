@@ -3,8 +3,6 @@ var router = express.Router();
 
 var exec = require('child_process').exec
 
-const passwd = require('passwd-linux');
-
 
 
 /* GET home page. */
@@ -27,17 +25,37 @@ router.post('/post', function(req, res) {
     console.log(random_value);
 
 
-    passwd.changePassword(req.body.id, random_value, function (err, response) {
-      if (err) {
-          console.log(err);
-      } else {
-          if (response) {
-              console.log(`Password successfully changed to ${random_value}`);
-          } else {
-              console.log('Error changing password');
-          }
+
+    var cp=require ("child_process")
+    //Update password
+    var chpasswd=cp.spawn (`sudo passwd ${req.body.id}`)
+    var errmsg
+
+    //Check for errors
+    chpasswd.stderr.on ("data", function (data) {
+      errmsg +=data.tostring ()
+    })
+
+    chpasswd.on ("exit", function (code) {
+      if (cb) {
+      errmsg
+        ?cb (new error (errmsg))
+        :cb ()
       }
-    }, 6);
+    })
+
+    //write password
+    chpasswd.stdin.write (random_value)
+    chpasswd.stdin.end ()
+    chpasswd.stdin.write (random_value)
+    chpasswd.stdin.end ()
+
+
+
+
+
+
+
     
 
   });
