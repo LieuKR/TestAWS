@@ -16,12 +16,12 @@ router.post('/post', function(req, res) {
 
     console.log(`userid ${req.body.id} is created.`)
 
-    // this value is NOT SAFE as random value
-    let random_value = Math.floor(Math.random()*10000)
-    console.log(random_value);
+    // // this value is NOT SAFE as random value
+    // let random_value = Math.floor(Math.random()*10000)
+    // console.log(random_value);
 
     // to set password by random number
-    const child = spawn(`sudo passwd ${req.body.id}`);
+    // const child = spawn(`sudo passwd ${req.body.id}`);
 
     // child.on('exit', function () {
     //   console.log('child.on is working');
