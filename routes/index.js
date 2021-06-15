@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const spawn = require('child_process').spawn;
+const { spawn } = require('child_process').spawn;
 
 /* GET home page. */
 router.get('/', function(req, res) {
