@@ -17,8 +17,8 @@ router.post('/post', function(req, res) {
   
   // Create user for linux.
 
-  exec(`sudo passwd ${req.body.id}`, function (error, stdout, stderr) {
-  //exec(`sudo useradd ${req.body.id}`, function (error, stdout, stderr) {
+  //exec(`sudo passwd ${req.body.id}`, function (error, stdout, stderr) {
+  exec(`sudo useradd ${req.body.id}`, function (error, stdout, stderr) {
 
     console.log(`userid ${req.body.id} is created.`)
 
@@ -27,17 +27,17 @@ router.post('/post', function(req, res) {
     console.log(random_value);
 
 
-    // passwd.changePassword(req.body.id, random_value, function (err, response) {
-    //   if (err) {
-    //       console.log(err);
-    //   } else {
-    //       if (response) {
-    //           console.log(`Password successfully changed to ${random_value}`);
-    //       } else {
-    //           console.log('Error changing password');
-    //       }
-    //   }
-    // }, 6);
+    passwd.changePassword(req.body.id, random_value, function (err, response) {
+      if (err) {
+          console.log(err);
+      } else {
+          if (response) {
+              console.log(`Password successfully changed to ${random_value}`);
+          } else {
+              console.log('Error changing password');
+          }
+      }
+    }, 6);
     
 
   });
