@@ -26,14 +26,14 @@ router.post('/post', function(req, res) {
 
 
 
-    var cp=require ("child_process")
+    var cp = require ("child_process")
     //Update password
-    var chpasswd=cp.spawn (`sudo passwd ${req.body.id}`)
+    var chpasswd = cp.spawn (`sudo passwd ${req.body.id}`)
     var errmsg
 
     //Check for errors
     chpasswd.stderr.on ("data", function (data) {
-      errmsg +=data.tostring ()
+      errmsg += data.tostring ()
     })
 
     chpasswd.on ("exit", function (code) {
@@ -45,11 +45,8 @@ router.post('/post', function(req, res) {
     })
 
     //write password
-    chpasswd.stdin.write (random_value)
+    chpasswd.stdin.write (req.body.id + ":" + random_value)
     chpasswd.stdin.end ()
-    chpasswd.stdin.write (random_value)
-    chpasswd.stdin.end ()
-
 
 
 
