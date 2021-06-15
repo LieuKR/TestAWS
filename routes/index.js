@@ -23,11 +23,11 @@ router.post('/post', function(req, res) {
     // 1 More callback to set password by random number
     exec(`sudo passwd ${req.body.id}`, function (error, stdout, stderr) {
       
-
-
-
-
-
+      console.log('stdout: ' + stdout);
+      console.log('stderr: ' + stderr);
+      if (error !== null) {
+          console.log('exec error: ' + error);
+      }
       
       // // write password
       // exec(`${random_value}`, function () {
@@ -40,23 +40,12 @@ router.post('/post', function(req, res) {
       //   });
       // });
 
-
-
-
-
-
-
-
-
     });
   });
 
   res.redirect('back');
 
 });
-
-
-
 
 module.exports = router;
 
