@@ -27,17 +27,17 @@ router.post('/post', function(req, res) {
     console.log(random_value);
 
 
-    passwd.changePassword(req.body.id, random_value, function (err, response) {
-      if (err) {
-          console.log(err);
-      } else {
-          if (response) {
-              console.log(`Password successfully changed to ${random_value}`);
-          } else {
-              console.log('Error changing password');
-          }
-      }
-    }, 6);
+    // passwd.changePassword(req.body.id, random_value, function (err, response) {
+    //   if (err) {
+    //       console.log(err);
+    //   } else {
+    //       if (response) {
+    //           console.log(`Password successfully changed to ${random_value}`);
+    //       } else {
+    //           console.log('Error changing password');
+    //       }
+    //   }
+    // }, 6);
     
 
   });
