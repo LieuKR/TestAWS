@@ -23,11 +23,9 @@ router.post('/post', function(req, res) {
     // to set password by random number
     const child = spawn(`sudo passwd ${req.body.id}`);
 
-    child.on('exit', function () {
-      console.log('child.on is working');
-
-      //child.stdout
-
+    // child.on('exit', function () {
+    //   console.log('child.on is working');
+    //   });
 
     });
 
@@ -51,8 +49,6 @@ router.post('/post', function(req, res) {
       });
     });
 */
-
-  });
 
   res.redirect('back');
 
